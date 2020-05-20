@@ -5,6 +5,7 @@ export class MutiSelectFlatCB implements ComponentFramework.StandardControl<IInp
 	private _container : HTMLDivElement;
 	private _mainContainer : HTMLDivElement;
 	private _unorderedList : HTMLUListElement;
+	private _errorLabel : HTMLLabelElement;
 	public _guidList : string[];
 	private _entityName : string;
 	private _fieldName : string;
@@ -37,8 +38,10 @@ export class MutiSelectFlatCB implements ComponentFramework.StandardControl<IInp
 		
 		this._mainContainer = document.createElement("div");
 		this._unorderedList = document.createElement("ul");
+		this._errorLabel = document.createElement("label");
 		this._unorderedList.classList.add("ks-cboxtags");
 		this._mainContainer.classList.add("multiselect-container");
+		var messageString = "";
 		
 		this._notifyOutputChanged = notifyOutputChanged;
 		this._checkBoxChanged = this.checkBoxChanged.bind(this);
@@ -83,11 +86,14 @@ export class MutiSelectFlatCB implements ComponentFramework.StandardControl<IInp
 				// perform additional operations on retrieved records
 			},
 			function (error) {
+				messageString += error.message;
+				self._errorLabel.innerHTML = messageString;
 				console.log(error.message);
 				// handle error conditions
 			}
-		);
+		);	
 		this._mainContainer.appendChild(this._unorderedList);
+		this._mainContainer.appendChild(this._errorLabel);
 		this._container.appendChild(this._mainContainer);
 	}
 
@@ -114,7 +120,7 @@ export class MutiSelectFlatCB implements ComponentFramework.StandardControl<IInp
 	public getOutputs(): IOutputs
 	{
 		return {
-			fieldValue : this._guidList.join().substr(1)
+			fieldValue : this._guidList.join().replace(/^,/, '')
 		};
 	}
 

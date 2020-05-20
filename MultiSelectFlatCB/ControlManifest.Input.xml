@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest>
-  <control namespace="D365.PCF" constructor="MutiSelectFlatCB" version="0.0.12" display-name-key="MutiSelectFlatCB" description-key="MutiSelectFlatCB description" control-type="standard">
+  <control namespace="D365.PCF" constructor="MutiSelectFlatCB" version="0.0.15" display-name-key="MutiSelectFlatCB" description-key="MutiSelectFlatCB description" control-type="standard">
     <!-- property node identifies a specific, configurable piece of data that the control expects from CDS-->
     <property name="fieldValue" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type="Multiple" usage="bound" required="true" />
     <!-- Input parameters-->
     <property name="entityNameToTransform" display-name-key="PropertyEntityName_Display_Key" description-key="PropertyEntityName_Desc_Key" of-type="SingleLine.Text" usage="input" required="true" default-value="" />
     <property name="fieldName" display-name-key="PropertyFieldName_Display_Key" description-key="PropertyFieldName_Desc_Key" of-type="SingleLine.Text" usage="input" required="true" default-value="" />
-
     <resources>
       <code path="index.ts" order="1" />
       <!-- UNCOMMENT TO ADD MORE RESOURCES-->
